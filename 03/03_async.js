@@ -17,12 +17,12 @@
     }, 1000);
   };
 
-  console.log("①");
-  wait1sec(() => console.log("②")); // console.logを実行する関数が引数です
-  wait1sec(() => console.log("③"));
-  wait1sec(() => console.log("④"));
-  console.log("⑤");
-  // *1 → ⑤ → 1秒後に一気に3つ「1秒経ちました」と表示
+  console.log("[1]");
+  wait1sec(() => console.log("[2]")); // console.logを実行する関数が引数です
+  wait1sec(() => console.log("[3]"));
+  wait1sec(() => console.log("[4]"));
+  console.log("[5]");
+  // [1] → [5] → 1秒後に一気に3つ「1秒経ちました」と表示
 }
 
 // コールバックの入れ子で連続的な非同期処理を行う
@@ -34,18 +34,18 @@
     }, 1000);
   };
 
-  console.log("①"); // *1
+  console.log("[1]");
   wait1sec(() => {
-    console.log("②"); // *2
+    console.log("[2]");
     wait1sec(() => {
-      console.log("③"); // *3
+      console.log("[3]");
       wait1sec(() => {
-        console.log("④"); // *４
+        console.log("[4]");
       });
     });
-    console.log("next ②"); // *2の次に呼ばれる
+    console.log("[2']"); // [2]の次に呼ばれる
   });
-  console.log("⑤"); // *5
+  console.log("[5]");
 }
 
 // Promiseで連続的な非同期処理を行う
@@ -58,20 +58,20 @@
     });
   };
 
-  console.log("①");
+  console.log("[1]");
   wait1sec()
     .then(() => {
-      console.log("②");
+      console.log("[2]");
       return wait1sec();
     })
     .then(() => {
-      console.log("③");
+      console.log("[3]");
       return wait1sec();
     })
     .then(() => {
-      console.log("④");
+      console.log("[4]");
     });
-  console.log("⑤");
+  console.log("[5]");
 }
 
 // async-awaitで連続的な非同期処理を行う
@@ -86,14 +86,14 @@
 
   const asyncFunc = async () => {
     await wait1sec(); // 非同期のコードだが、このコードの非同期処理が終わった後、次の行が呼ばれる
-    console.log("②");
+    console.log("[2]");
     await wait1sec();
-    console.log("③");
+    console.log("[3]");
     await wait1sec();
-    console.log("④");
+    console.log("[4]");
   };
 
-  console.log("①");
+  console.log("[1]");
   asyncFunc();
-  console.log("⑤");
+  console.log("[5]");
 }
