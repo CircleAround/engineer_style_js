@@ -31,19 +31,16 @@ const users = [
   {
     id: 1,
     name: "織田信長",
-    birthDay: new Date(1534, 6, 23),
     prefecture_id: 3,
   },
   {
     id: 2,
     name: "豊臣秀吉",
-    birthDay: new Date(1537, 3, 17),
     prefecture_id: 2,
   },
   {
     id: 3,
     name: "徳川家康",
-    birthDay: new Date(1543, 1, 31),
     prefecture_id: 1,
   },
 ];
@@ -60,11 +57,8 @@ app.get("/prefectures.json", (req, res) => {
 });
 
 app.post("/users", (req, res) => {
-  console.log(req.body);
-
   const body = req.body;
   users.push({ id: users.length + 1, name: body.name });
-  console.log(users);
 
   res.status = 204;
   res.send("");
